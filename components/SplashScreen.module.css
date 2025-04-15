@@ -1,0 +1,85 @@
+/* SplashScreen.module.css */
+
+/* 
+  .splash styles the full-screen splash screen container.
+  It is fixed to cover the entire viewport and centers its content.
+*/
+.splash {
+  position: fixed;             /* Positions the element fixed relative to the viewport */
+  top: 0;                      /* Aligns the top edge to the top of the viewport */
+  left: 0;                     /* Aligns the left edge to the left of the viewport */
+  width: 100%;                 /* Full width of the viewport */
+  height: 100%;                /* Full height of the viewport */
+  background: #f0f8ff;         /* Light blue background color */
+  display: flex;               /* Uses flexbox for centering content */
+  justify-content: center;     /* Horizontally centers child elements */
+  align-items: center;         /* Vertically centers child elements */
+  z-index: 9999;               /* Ensures the splash screen is above all other elements */
+  animation: fadeInFromBottom 1s ease forwards; /* Applies a fade-in animation from the bottom */
+}
+
+/* 
+  .textContainer centers text within the splash screen.
+*/
+.textContainer {
+  text-align: center;          /* Center-aligns text within its container */
+}
+
+/* 
+  .title styles the main title text on the splash screen.
+*/
+.title {
+  font-size: 3rem;             /* Sets a large font size */
+  color: #333;                 /* Dark gray text color */
+  margin: 0;                   /* Removes default margins */
+}
+
+/* 
+  .motto styles the motto or subtitle text below the title.
+*/
+.motto {
+  font-size: 1.5rem;           /* Sets a smaller font size than the title */
+  color: #666;                 /* Medium gray text color */
+  margin-top: 0.5rem;          /* Adds a small top margin */
+}
+
+/* 
+  @keyframes fadeInFromBottom defines the animation used when the splash screen loads.
+  It causes the element to slide up from the bottom and fade in.
+*/
+@keyframes fadeInFromBottom {
+  0% {
+    opacity: 0;              /* Fully transparent at the start */
+    transform: translateY(100%); /* Starts off-screen at the bottom */
+  }
+  60% {
+    opacity: 1;              /* Becomes fully opaque by 60% of the animation */
+    transform: translateY(0);   /* Moves to its original vertical position */
+  }
+  100% {
+    opacity: 1;              /* Remains fully opaque at the end */
+    transform: translateY(0);   /* Remains in place */
+  }
+}
+
+/* 
+  .exit applies an exit animation to the splash screen, making it fly upward and fade out.
+*/
+.exit {
+  animation: flyUpAndFadeOut 1s ease forwards; /* Uses the flyUpAndFadeOut keyframes */
+}
+
+/* 
+  @keyframes flyUpAndFadeOut defines the exit animation.
+  It moves the element upwards while fading it out.
+*/
+@keyframes flyUpAndFadeOut {
+  0% {
+    opacity: 1;              /* Fully opaque at the beginning */
+    transform: translateY(0);   /* Starts in its normal position */
+  }
+  100% {
+    opacity: 0;              /* Fully transparent at the end */
+    transform: translateY(-100%); /* Moves up out of view */
+  }
+}
