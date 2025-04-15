@@ -1,5 +1,5 @@
 // pages/Display.js
-
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 // Import core React features and hooks, Next.js router, 
 // Bootstrap components, your custom FixedHeader, and required icons.
 import React, { useState, useEffect } from 'react';
@@ -84,7 +84,7 @@ function Display({ darkMode, toggleDarkMode }) {
   // ----------------------------- //
   // Fetch images from the backend server and update state.
   const fetchData = () => {
-    fetch('http://127.0.0.1:5001/list')
+    fetch(`${BACKEND_URL}/list`)
       .then((res) => res.json())
       .then((data) => {
         // Update state if images are returned from API
@@ -108,7 +108,7 @@ function Display({ darkMode, toggleDarkMode }) {
     if (deleteMode && selectedForDeletion.length > 0) {
       // Delete all selected images using POST calls to the backend.
       Promise.all(selectedForDeletion.map(url =>
-        fetch('http://127.0.0.1:5001/delete', {
+        fetch(`${BACKEND_URL}/delete`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url: url }),
@@ -216,7 +216,7 @@ function Display({ darkMode, toggleDarkMode }) {
       if (name) formData.append('name', name);
       // Use XMLHttpRequest for the file upload.
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://127.0.0.1:5001/upload');
+      xhr.open('POST', `${BACKEND_URL}/upload`);
       xhr.onload = () => {
         if (xhr.status === 200) {
           try {
@@ -298,7 +298,8 @@ function Display({ darkMode, toggleDarkMode }) {
     setCustomMode({});
     setIsUpdating(true);
     try {
-      const response = await fetch('http://127.0.0.1:5001/update', {
+      const response = await fetch(`${BACKEND_URL}/update`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(selectedItem),
@@ -704,7 +705,7 @@ function Display({ darkMode, toggleDarkMode }) {
                     className="iconButton favoriteIcon red"
                     onClick={() => {
                       // Toggle off favorite status
-                      fetch('http://127.0.0.1:5001/favorite', {
+                      fetch(`${BACKEND_URL}/favorite`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ id: selectedItem.id, favorite: false }),
